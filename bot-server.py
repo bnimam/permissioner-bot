@@ -20,6 +20,7 @@ async def on_ready():
 
 @client.event
 async def on_messsage(msg):
+    print(msg)
     if msg.author == client.user:
         return
 
