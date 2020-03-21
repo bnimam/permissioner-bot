@@ -14,9 +14,8 @@ client = commands.Bot(command_prefix='!')
 
 @client.event
 async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
+    print(f'Logged in as: {client.user.name}')
+    print(f'ID: {client.user.id}')
     print('------')
 
 @client.command()
@@ -24,13 +23,16 @@ async def perm(ctx):
     if ctx.author == client.user:
         return
 
-    rnd = random.randint(0, 3)
+    if not ctx.message.guild:
+        ctx.channel.send("This is not the proper way to ask me")
+
     roles = ctx.message.guild.roles
     pm_role = None
     for r in roles:
         if r.name == 'PERMISSIONER':
             pm_role = r
 
+    rnd = random.randint(0, 3)
     if rnd == 0:
         reply = f"{ctx.message.author.mention} Permission granted!"
     elif rnd == 1:
