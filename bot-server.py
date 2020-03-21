@@ -23,7 +23,7 @@ async def perm(ctx):
     if ctx.author == client.user:
         return
 
-    if not ctx.message.guild:
+    if ctx.message.guild is None:
         ctx.channel.send("This is not the proper way to ask me")
 
     roles = ctx.message.guild.roles
@@ -37,7 +37,7 @@ async def perm(ctx):
         reply = f"{ctx.message.author.mention} Permission granted!"
     elif rnd == 1:
         reply = f"{ctx.message.author.mention} Permission denied!"
-    elif pm_role:
+    elif pm_role is not None:
         reply = f"{ctx.message.author.mention} Don't ask me! Ask {pm_role.mention}!"
     else:
         reply = f"{ctx.message.author.mention} Don't ask me! Ask someone more important!"
