@@ -1,15 +1,11 @@
 """The main running script of the Permissioner-Bot"""
 import discord
+import configparser
 
-creds = {}
+creds = configparser.ConfigParser()
+creds.read('.config')
 
-with open('.config', 'r') as f:
-    for l in f:
-        kv = l.split('=')
-        if len(kv) > 1:
-            creds[kv[0]] = kv[1]
-
-TOKEN = creds['token']
+TOKEN = creds['credentials']['token']
 
 client = discord.Client()
 
