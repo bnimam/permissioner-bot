@@ -26,7 +26,7 @@ async def perm(ctx):
 
     #q = ''.join(ctx.content.replace('!perm', '').split(' '))
     rnd = random.randint(0, 3)
-    pm = ctx.message.channel.roles
+    pm = ctx.message.guild.roles
     print(pm)
 
     if rnd == 0:
