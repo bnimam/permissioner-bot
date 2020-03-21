@@ -26,7 +26,6 @@ async def perm(ctx):
 
     #q = ''.join(ctx.content.replace('!perm', '').split(' '))
     rnd = random.randint(0, 3)
-    pmsn = ctx.server.
 
     if rnd == 0:
         reply = f"{ctx.message.author.mention()} Permission granted!"
