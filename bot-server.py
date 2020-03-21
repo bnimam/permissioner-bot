@@ -28,11 +28,11 @@ async def perm(ctx):
     rnd = random.randint(0, 3)
 
     if rnd == 0:
-        reply = f"{ctx.message.author.mention()} Permission granted!"
+        reply = f"{ctx.message.author.mention} Permission granted!"
     elif rnd == 1:
-        reply = f"{ctx.message.author.mention()} Permission denied!"
+        reply = f"{ctx.message.author.mention} Permission denied!"
     else:
-        reply = f"{ctx.message.author.mention()} Don't ask me, ask <@!PERMISSIONER>!"
+        reply = f"{ctx.message.author.mention} Don't ask me, ask <@!PERMISSIONER>!"
 
     await ctx.channel.send(reply)
 
