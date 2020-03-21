@@ -1,5 +1,6 @@
 """The main running script of the Permissioner-Bot"""
 import discord
+from discord.ext import commands
 import configparser
 import random
 
@@ -18,9 +19,8 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-@client.event
-async def on_messsage(msg):
-    print(msg)
+@client.command()
+async def perm(msg):
     if msg.author == client.user:
         return
 
