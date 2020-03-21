@@ -24,17 +24,21 @@ async def perm(ctx):
     if ctx.author == client.user:
         return
 
-    #q = ''.join(ctx.content.replace('!perm', '').split(' '))
     rnd = random.randint(0, 3)
-    pm = ctx.message.guild.roles
-    print(pm)
+    roles = ctx.message.guild.roles
+    pm_role = None
+    for r in roles:
+        if r.name == 'PERMISSIONER':
+            pm_role = r
 
     if rnd == 0:
         reply = f"{ctx.message.author.mention} Permission granted!"
     elif rnd == 1:
         reply = f"{ctx.message.author.mention} Permission denied!"
+    elif pm_role:
+        reply = f"{ctx.message.author.mention} Don't ask me! Ask {pm_role.mention}!"
     else:
-        reply = f"{ctx.message.author.mention} Don't ask me! Ask <@&PERMISSIONER>!"
+        reply = f"{ctx.message.author.mention} Don't ask me! Ask someone more important!"
 
     await ctx.channel.send(reply)
 
