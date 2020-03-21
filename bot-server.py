@@ -9,7 +9,7 @@ creds.read('.config')
 
 TOKEN = creds['credentials']['token']
 
-client = discord.Client()
+client = commands.Bot(command_prefix='!')
 
 
 @client.event
