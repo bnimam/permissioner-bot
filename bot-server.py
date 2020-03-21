@@ -20,21 +20,21 @@ async def on_ready():
     print('------')
 
 @client.command()
-async def perm(msg):
-    if msg.author == client.user:
+async def perm(ctx):
+    if ctx.author == client.user:
         return
 
-    if msg.content.startswith('!perm'):
-        #q = ''.join(msg.content.replace('!perm', '').split(' '))
+    if ctx.message.startswith('!perm'):
+        #q = ''.join(ctx.content.replace('!perm', '').split(' '))
         rnd = random.randint(0, 3)
 
         if rnd == 0:
-            reply = f"@{msg.author} Permission granted!"
+            reply = f"@{ctx.message.author} Permission granted!"
         elif rnd == 1:
-            reply = f"@{msg.author} Permission denied!"
+            reply = f"@{ctx.message.author} Permission denied!"
         else:
-            reply = f"@{msg.author} Don't ask me, ask @PERMISSIONER !"
+            reply = f"@{ctx.message.author} Don't ask me, ask @PERMISSIONER !"
 
-        await msg.channel.send(reply)
+        await ctx.channel.send(reply)
 
 client.run(TOKEN)
