@@ -6,7 +6,8 @@ creds = {}
 with open('.config', 'r') as f:
     for l in f:
         kv = l.split('=')
-        creds[kv[0]] = kv[1]
+        if len(kv) > 1:
+            creds[kv[0]] = kv[1]
 
 TOKEN = creds['token']
 
