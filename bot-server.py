@@ -24,17 +24,16 @@ async def perm(ctx):
     if ctx.author == client.user:
         return
 
-    if ctx.message.startswith('!perm'):
-        #q = ''.join(ctx.content.replace('!perm', '').split(' '))
-        rnd = random.randint(0, 3)
+    #q = ''.join(ctx.content.replace('!perm', '').split(' '))
+    rnd = random.randint(0, 3)
 
-        if rnd == 0:
-            reply = f"@{ctx.message.author} Permission granted!"
-        elif rnd == 1:
-            reply = f"@{ctx.message.author} Permission denied!"
-        else:
-            reply = f"@{ctx.message.author} Don't ask me, ask @PERMISSIONER !"
+    if rnd == 0:
+        reply = f"@{ctx.message.author} Permission granted!"
+    elif rnd == 1:
+        reply = f"@{ctx.message.author} Permission denied!"
+    else:
+        reply = f"@{ctx.message.author} Don't ask me, ask @PERMISSIONER !"
 
-        await ctx.channel.send(reply)
+    await ctx.channel.send(reply)
 
 client.run(TOKEN)
