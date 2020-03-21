@@ -25,6 +25,7 @@ async def perm(ctx):
 
     if ctx.message.guild is None:
         await ctx.channel.send("This is not the proper way to ask me")
+        return
 
     roles = ctx.message.guild.roles
     pm_role = None
