@@ -1,8 +1,8 @@
 """The main running script of the Permissioner-Bot"""
-import discord
-from discord.ext import commands
 import configparser
 import random
+
+from discord.ext import commands
 
 creds = configparser.ConfigParser()
 creds.read('.config')
