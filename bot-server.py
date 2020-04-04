@@ -30,7 +30,7 @@ async def perm(ctx):
     roles = ctx.message.guild.roles
     pm_role = None
     for r in roles:
-        if r.name == 'PERMISSIONER':
+        if r.name == 'permiisoner':
             pm_role = r
 
     rnd = random.randint(0, 3)
