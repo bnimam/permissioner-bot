@@ -18,6 +18,7 @@ async def on_ready():
     print(f'ID: {client.user.id}')
     print('------')
 
+
 @client.command()
 async def perm(ctx):
     if ctx.author == client.user:
@@ -44,5 +45,6 @@ async def perm(ctx):
         reply = f"{ctx.message.author.mention} Don't ask me! Ask someone more important!"
 
     await ctx.channel.send(reply)
+    return
 
 client.run(TOKEN)
