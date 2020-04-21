@@ -79,7 +79,8 @@ def discord_main(args):
     # Make tensorflow less verbose; filter out info (1+) and warnings (2+) but not errors (3).
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
     sess = tf.Session(config=config)
-    tf.global_variables_initializer().run()
+    tf.global_variables_initializer()
+    sess.run()
     saver = tf.train.Saver(net.save_variables_list())
     # Restore the saved variables, replacing the initialized values.
     print("Restoring weights...")
