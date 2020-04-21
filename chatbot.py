@@ -80,7 +80,6 @@ def discord_main(args):
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
     sess = tf.Session(config=config)
     tf.global_variables_initializer()
-    sess.run()
     saver = tf.train.Saver(net.save_variables_list())
     # Restore the saved variables, replacing the initialized values.
     print("Restoring weights...")
