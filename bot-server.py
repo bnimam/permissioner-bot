@@ -1,8 +1,11 @@
 """The main running script of the Permissioner-Bot"""
+
 import configparser
 import random
 
 from discord.ext import commands
+
+from chatbot import main
 
 creds = configparser.ConfigParser()
 creds.read('.config')
@@ -10,6 +13,8 @@ creds.read('.config')
 TOKEN = creds['credentials']['token']
 
 client = commands.Bot(command_prefix='!')
+
+CBOT = main()
 
 
 @client.event
@@ -43,6 +48,21 @@ async def perm(ctx):
         reply = f"{ctx.message.author.mention} Don't ask me! Ask {pm_role.mention}!"
     else:
         reply = f"{ctx.message.author.mention} Don't ask me! Ask someone more important!"
+
+    await ctx.channel.send(reply)
+    return
+
+
+@client.command()
+async def q(ctx):
+    if ctx.author == client.user:
+        return
+
+    if ctx.message.guild is None:
+        await ctx.channel.send("This is not the proper way to ask me")
+        return
+
+    reply = CBOT.proc_disc_message(ctx.message.content)
 
     await ctx.channel.send(reply)
     return
