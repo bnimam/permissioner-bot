@@ -39,7 +39,7 @@ def main():
                         'noticeably degrading coherence;'
                         'set to <0 to disable relevance masking')
     args = parser.parse_args()
-    discord_main(args)
+    return discord_main(args)
 
 
 def get_paths(input_path):
