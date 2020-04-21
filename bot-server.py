@@ -7,14 +7,14 @@ from discord.ext import commands
 
 from chatbot import main
 
+CBOT = main()
+
 creds = configparser.ConfigParser()
 creds.read('.config')
 
 TOKEN = creds['credentials']['token']
 
 client = commands.Bot(command_prefix='!')
-
-CBOT = main()
 
 
 @client.event
