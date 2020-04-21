@@ -78,14 +78,14 @@ def discord_main(args):
     config.gpu_options.allow_growth = True
     # Make tensorflow less verbose; filter out info (1+) and warnings (2+) but not errors (3).
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-    with tf.Session(config=config) as sess:
-        tf.global_variables_initializer().run()
-        saver = tf.train.Saver(net.save_variables_list())
-        # Restore the saved variables, replacing the initialized values.
-        print("Restoring weights...")
-        saver.restore(sess, model_path)
-        return CBOT(net, sess, chars, vocab, args.n, args.beam_width,
-                    args.relevance, args.temperature, args.topn)
+    sess = tf.Session(config=config)
+    tf.global_variables_initializer().run()
+    saver = tf.train.Saver(net.save_variables_list())
+    # Restore the saved variables, replacing the initialized values.
+    print("Restoring weights...")
+    saver.restore(sess, model_path)
+    return CBOT(net, sess, chars, vocab, args.n, args.beam_width,
+                args.relevance, args.temperature, args.topn)
 
 
 class CBOT:
