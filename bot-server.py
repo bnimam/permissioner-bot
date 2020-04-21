@@ -5,10 +5,6 @@ import random
 
 from discord.ext import commands
 
-from chatbot import main
-
-CBOT = main()
-
 creds = configparser.ConfigParser()
 creds.read('.config')
 
