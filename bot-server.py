@@ -62,7 +62,7 @@ async def q(ctx):
         await ctx.channel.send("This is not the proper way to ask me")
         return
 
-    reply = CBOT.proc_disc_message(ctx.message.content)
+    reply = f"{ctx.message.author.mention}" + CBOT.proc_disc_message(ctx.message.content)
 
     await ctx.channel.send(reply)
     return
