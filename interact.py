@@ -132,16 +132,15 @@ class run:
     logger.info("Sample a personality")
     dataset = get_dataset(tokenizer, args.dataset_path, args.dataset_cache)
     personalities = [dialog["personality"] for dataset in dataset.values() for dialog in dataset]
-    print(personalities)
-    personality = random.choice(personalities)
     logger.info("Selected personality: %s", tokenizer.decode(chain(*personality)))
 
     history = []
 
     def process_text(self, raw_text):
+        personality = random.choice(self.personalities)
         self.history.append(self.tokenizer.encode(raw_text))
         with torch.no_grad():
-            out_ids = sample_sequence(self.personality, self.history, self.tokenizer, self.model, self.args)
+            out_ids = sample_sequence(personality, self.history, self.tokenizer, self.model, self.args)
         self.history.append(out_ids)
         self.history = self.history[-(2*self.args.max_history+1):]
         out_text = self.tokenizer.decode(out_ids, skip_special_tokens=True)
