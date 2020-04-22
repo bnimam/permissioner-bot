@@ -94,7 +94,7 @@ class run:
     parser.add_argument("--dataset_cache", type=str, default='./dataset_cache', help="Path or url of the dataset cache")
     parser.add_argument("--model", type=str, default="openai-gpt", help="Model type (openai-gpt or gpt2)", choices=['openai-gpt', 'gpt2'])  # anything besides gpt2 will load openai-gpt
     parser.add_argument("--model_checkpoint", type=str, default="", help="Path, url or short name of the model")
-    parser.add_argument("--max_history", type=int, default=2, help="Number of previous utterances to keep in history")
+    parser.add_argument("--max_history", type=int, default=20, help="Number of previous utterances to keep in history")
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu", help="Device (cuda or cpu)")
 
     parser.add_argument("--no_sample", action='store_true', help="Set to use greedy decoding instead of sampling")
@@ -121,7 +121,6 @@ class run:
         torch.random.manual_seed(args.seed)
         torch.cuda.manual_seed(args.seed)
 
-
     logger.info("Get pretrained model and tokenizer")
     tokenizer_class, model_class = (GPT2Tokenizer, GPT2LMHeadModel) if args.model == 'gpt2' else (OpenAIGPTTokenizer, OpenAIGPTLMHeadModel)
     tokenizer = tokenizer_class.from_pretrained(args.model_checkpoint)
@@ -137,7 +136,11 @@ class run:
     history = []
 
     def process_text(self, raw_text):
-        personality = random.choice(self.personalities)
+        #personality = random.choice(self.personalities)
+        personality = [['i', 'am', 'a', 'discord', 'bot', '.'],
+                       ['my', 'job', 'is', 'to', 'give', 'or', 'deny', 'permission', '.'],
+                       ['i', 'love', 'my', 'job', '.'],
+                       ['josh', 'is', 'my', 'favorite', 'person', '.']]
         self.history.append(self.tokenizer.encode(raw_text))
         with torch.no_grad():
             out_ids = sample_sequence(personality, self.history, self.tokenizer, self.model, self.args)

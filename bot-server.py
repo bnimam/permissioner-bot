@@ -73,6 +73,7 @@ async def q(ctx):
     await ctx.channel.send(reply)
     return
 
+
 @client.command()
 async def memepls(ctx):
     if ctx.author == client.user:
