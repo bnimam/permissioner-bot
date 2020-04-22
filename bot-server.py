@@ -2,8 +2,10 @@
 
 import configparser
 import random
+import praw
 
 from discord.ext import commands
+from discord import Embed
 
 from interact import run
 
@@ -15,6 +17,10 @@ creds.read('.config')
 TOKEN = creds['credentials']['token']
 
 client = commands.Bot(command_prefix='!')
+
+reddit = praw.Reddit(client_id=creds['reddit_creds']['client_id'],
+                     client_secret=creds['reddit_creds']['secret'],
+                     user_agent='permissioner-bot')
 
 
 @client.event
@@ -65,6 +71,35 @@ async def q(ctx):
     reply = f"{ctx.message.author.mention} " + CBOT.process_text(ctx.message.content)
 
     await ctx.channel.send(reply)
+    return
+
+@client.command()
+async def memepls(ctx):
+    if ctx.author == client.user:
+        return
+
+    if ctx.message.guild is None:
+        await ctx.channel.send("This is not the proper way to ask me")
+        return
+
+    rand_subred = random.randint(0, 2)
+    if rand_subred == 0:
+        subreddit = reddit.subreddit('DeepFriedMemes')
+    if rand_subred == 1:
+        subreddit = reddit.subreddit('dankmemes')
+    else:
+        subreddit = reddit.subreddit('bonehurtingjuice')
+
+    posts = subreddit.hot(100)
+    url = [p.url for p in posts if any(['.jpg', '.png', '.gif', 'jpeg'])]
+
+    picked_url = random.choice(url)
+
+    e = Embed()
+    e.set_image(url=picked_url)
+
+    reply = f"{ctx.message.author.mention}"
+    await ctx.channel.send(reply, embed=e)
     return
 
 client.run(TOKEN)
