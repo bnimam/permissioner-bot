@@ -130,15 +130,16 @@ class run:
 
     logger.info("Sample a personality")
     dataset = get_dataset(tokenizer, args.dataset_path, args.dataset_cache)
-    personalities = [dialog["personality"] for dataset in dataset.values() for dialog in dataset]
+    #personalities = [dialog["personality"] for dataset in dataset.values() for dialog in dataset]
     #logger.info("Selected personality: %s", tokenizer.decode(chain(*personality)))
 
     history = []
 
     def process_text(self, raw_text):
         #personality = random.choice(self.personalities)
-        personality = ['i am a discord bot.', 'my job is to give or deny permission.',
-                       'i love my job.', 'josh is my favorite person.']
+        personality = ['i am a robot.', 'my job is to give or deny permission.',
+                       'i love my job.', 'josh is my favorite person.', 'my name is permissioner-bot.',
+                       'i do not have a gender.']
         personality = [self.tokenizer.encode(line) for line in personality]
         self.history.append(self.tokenizer.encode(raw_text))
         with torch.no_grad():
