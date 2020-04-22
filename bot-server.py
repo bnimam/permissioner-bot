@@ -90,7 +90,7 @@ async def memepls(ctx):
     else:
         subreddit = reddit.subreddit('bonehurtingjuice')
 
-    posts = subreddit.hot(100)
+    posts = subreddit.hot(limit=100)
     url = [p.url for p in posts if any(['.jpg', '.png', '.gif', 'jpeg'])]
 
     picked_url = random.choice(url)
