@@ -87,7 +87,8 @@ def sample_sequence(personality, history, tokenizer, model, args, current_output
 
     return current_output
 
-def run():
+
+class run:
     parser = ArgumentParser()
     parser.add_argument("--dataset_path", type=str, default="", help="Path or url of the dataset. If empty download from S3.")
     parser.add_argument("--dataset_cache", type=str, default='./dataset_cache', help="Path or url of the dataset cache")
@@ -114,12 +115,11 @@ def run():
             raise ValueError("Interacting with GPT2 requires passing a finetuned model_checkpoint")
         else:
             args.model_checkpoint = download_pretrained_model()
-	
-	
+
     if args.seed != 0:
-    	random.seed(args.seed)
-    	torch.random.manual_seed(args.seed)
-    	torch.cuda.manual_seed(args.seed)
+        random.seed(args.seed)
+        torch.random.manual_seed(args.seed)
+        torch.cuda.manual_seed(args.seed)
 
 
     logger.info("Get pretrained model and tokenizer")
@@ -132,11 +132,23 @@ def run():
     logger.info("Sample a personality")
     dataset = get_dataset(tokenizer, args.dataset_path, args.dataset_cache)
     personalities = [dialog["personality"] for dataset in dataset.values() for dialog in dataset]
+    print(personalities)
     personality = random.choice(personalities)
     logger.info("Selected personality: %s", tokenizer.decode(chain(*personality)))
 
     history = []
-    while True:
+
+    def process_text(self, raw_text):
+        self.history.append(self.tokenizer.encode(raw_text))
+        with torch.no_grad():
+            out_ids = sample_sequence(self.personality, self.history, self.tokenizer, self.model, self.args)
+        self.history.append(out_ids)
+        self.history = self.history[-(2*self.args.max_history+1):]
+        out_text = self.tokenizer.decode(out_ids, skip_special_tokens=True)
+        return out_text
+
+
+"""while True:
         raw_text = input(">>> ")
         while not raw_text:
             print('Prompt should not be empty!')
@@ -148,7 +160,4 @@ def run():
         history = history[-(2*args.max_history+1):]
         out_text = tokenizer.decode(out_ids, skip_special_tokens=True)
         print(out_text)
-
-
-if __name__ == "__main__":
-    run()
+"""
