@@ -141,6 +141,7 @@ class run:
                        ['my', 'job', 'is', 'to', 'give', 'or', 'deny', 'permission', '.'],
                        ['i', 'love', 'my', 'job', '.'],
                        ['josh', 'is', 'my', 'favorite', 'person', '.']]
+        personality = self.tokenizer.encode(personality)
         self.history.append(self.tokenizer.encode(raw_text))
         with torch.no_grad():
             out_ids = sample_sequence(personality, self.history, self.tokenizer, self.model, self.args)
