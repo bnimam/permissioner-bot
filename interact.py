@@ -137,10 +137,8 @@ class run:
 
     def process_text(self, raw_text):
         #personality = random.choice(self.personalities)
-        personality = [['i', 'am', 'a', 'discord', 'bot', '.'],
-                       ['my', 'job', 'is', 'to', 'give', 'or', 'deny', 'permission', '.'],
-                       ['i', 'love', 'my', 'job', '.'],
-                       ['josh', 'is', 'my', 'favorite', 'person', '.']]
+        personality = ['i am a discord bot.', 'my job is to give or deny permission.',
+                       'i love my job.', 'josh is my favorite person.']
         personality = self.tokenizer.encode(personality)
         self.history.append(self.tokenizer.encode(raw_text))
         with torch.no_grad():
