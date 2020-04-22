@@ -132,6 +132,7 @@ class run:
     dataset = get_dataset(tokenizer, args.dataset_path, args.dataset_cache)
     personalities = [dialog["personality"] for dataset in dataset.values() for dialog in dataset]
     #logger.info("Selected personality: %s", tokenizer.decode(chain(*personality)))
+    print(tokenizer.encode('i am a discord bot. my job is to give or deny permission. i love my job. josh is my favorite person.'))
 
     history = []
 
