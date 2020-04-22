@@ -132,7 +132,7 @@ class run:
     logger.info("Sample a personality")
     dataset = get_dataset(tokenizer, args.dataset_path, args.dataset_cache)
     personalities = [dialog["personality"] for dataset in dataset.values() for dialog in dataset]
-    logger.info("Selected personality: %s", tokenizer.decode(chain(*personality)))
+    #logger.info("Selected personality: %s", tokenizer.decode(chain(*personality)))
 
     history = []
 
