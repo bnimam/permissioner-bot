@@ -84,11 +84,15 @@ async def memepls(ctx):
         return
 
     rand_subred = random.randint(0, 2)
+    print(f'rand num {rand_subred}')
     if rand_subred == 0:
+        print('deepfriedmemes')
         subreddit = reddit.subreddit('DeepFriedMemes')
     if rand_subred == 1:
+        print('dankmemes')
         subreddit = reddit.subreddit('dankmemes')
     else:
+        print('bonehurtingjuice')
         subreddit = reddit.subreddit('bonehurtingjuice')
 
     posts = subreddit.hot(limit=100)
