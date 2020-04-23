@@ -83,22 +83,19 @@ async def memepls(ctx):
         await ctx.channel.send("This is not the proper way to ask me")
         return
 
-    rand_subred = random.randint(0, 2)
-    print(f'rand num {rand_subred}')
-    if rand_subred == 0:
-        print('deepfriedmemes')
-        subreddit = reddit.subreddit('DeepFriedMemes')
-    if rand_subred == 1:
-        print('dankmemes')
-        subreddit = reddit.subreddit('dankmemes')
-    else:
-        print('bonehurtingjuice')
-        subreddit = reddit.subreddit('bonehurtingjuice')
+    subreddits = ['DeepFriedMemes', 'dankmemes', 'bonehurtingjuice']
+    chosen_sub = random.choice(subreddits)
+
+    print(f'grabbing a dope meme from {chosen_sub}')
+    subreddit = reddit.subreddit(chosen_sub)
 
     posts = subreddit.hot(limit=100)
-    url = [p.url for p in posts if any(['.jpg', '.png', '.gif', 'jpeg'])]
+    urls = [p.url for p in posts if any(['.jpg', '.png', '.gif', 'jpeg'])]
 
-    picked_url = random.choice(url)
+    print(f'grabbing a post from {len(urls)} valid posts.')
+    print('-----------')
+
+    picked_url = random.choice(urls)
 
     e = Embed()
     e.set_image(url=picked_url)
