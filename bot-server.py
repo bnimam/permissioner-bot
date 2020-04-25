@@ -92,15 +92,12 @@ async def memepls(ctx):
     posts = subreddit.hot(limit=100)
     urls = [p.url for p in posts if any(['.jpg', '.png', '.gif', 'jpeg'])]
 
-    print(f'grabbing a post from {len(urls)} valid posts.')
-    print('-----------')
-
     picked_url = random.choice(urls)
 
     e = Embed()
     e.set_image(url=picked_url)
 
-    reply = f"{ctx.message.author.mention}"
+    reply = f"{ctx.message.author.mention} subreddit:{chosen_sub}"
     await ctx.channel.send(reply, embed=e)
     return
 
