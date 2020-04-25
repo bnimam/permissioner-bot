@@ -96,7 +96,7 @@ async def memepls(ctx):
     e = Embed()
     e.set_image(url=picked_url)
 
-    reply = f"{ctx.message.author.mention} subreddit:{chosen_sub}"
+    reply = f"{ctx.message.author.mention} subreddit: {chosen_sub}"
     await ctx.channel.send(reply, embed=e)
     return
 
