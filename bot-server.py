@@ -83,7 +83,7 @@ async def memepls(ctx):
         await ctx.channel.send("This is not the proper way to ask me")
         return
 
-    subreddits = ['DeepFriedMemes', 'dankmemes', 'bonehurtingjuice']
+    subreddits = ['DeepFriedMemes', 'dankmemes', 'bonehurtingjuice', 'meirl']
     chosen_sub = random.choice(subreddits)
 
     print(f'grabbing a dope meme from {chosen_sub}')
