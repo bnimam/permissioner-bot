@@ -86,7 +86,6 @@ async def memepls(ctx):
     subreddits = ['DeepFriedMemes', 'dankmemes', 'bonehurtingjuice', 'meirl']
     chosen_sub = random.choice(subreddits)
 
-    print(f'grabbing a dope meme from {chosen_sub}')
     subreddit = reddit.subreddit(chosen_sub)
 
     posts = subreddit.hot(limit=100)
